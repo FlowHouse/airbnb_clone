@@ -3,7 +3,11 @@ CREATE USER 'airbnb_user_dev'@'%' IDENTIFIED BY 'development1';
 CREATE USER 'airbnb_user_prod'@'localhost' IDENTIFIED BY 'production1';
 
 -- Creating databases: dev and prod
+<<<<<<< HEAD
 CREATE DATABASE airbnb_dev  CHARACTER SET utf8 COLLATE utf8_general_ci;
+=======
+CREATE DATABASE airbnb_dev CHARACTER SET utf8 COLLATE utf8_general_ci;
+>>>>>>> 1397f88bf197513da2c5e8e027495ff15d34af02
 CREATE DATABASE airbnb_prod CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- Granting PRIVILEGES to users
