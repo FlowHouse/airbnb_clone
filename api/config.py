@@ -1,4 +1,5 @@
 ENV = os.environ.get('AIRBNB_ENV', '')
+
 # DEV
 if ENV == 'development':
 	DEBUG = True
