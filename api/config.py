@@ -26,3 +26,6 @@ else if ENV == 'production':
 		'charset': 'utf8',
 		'pasword': os.environ.get('AIRBNB_DATABASE_PWD_PROD', '')
 	}
+# ERRORS
+else:
+	raise Exception("Sum Ting Wong")
