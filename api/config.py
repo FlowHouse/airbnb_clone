@@ -8,7 +8,7 @@ if ENV == 'development':
 	HOST = '127.0.0.1'
 	PORT = 3333
 	DATABASE = {
-		'host': '158.69.91.82',# IP address for web-01
+		'host': '158.69.84.192',# IP address for web-01
 		'user':'airbnb_user_dev',
 		'database': 'airbnb_dev',
 		'port': '3306',
@@ -21,7 +21,7 @@ elif ENV == 'production':
 	HOST = '0.0.0.0'
 	PORT = 3000
 	DATABASE = {
-		'host': '158.69.91.82',# IP address for web-01,
+		'host': '158.69.84.192',# IP address for web-01,
 		'user':'airbnb_user_prod',
 		'database': 'airbnb_prod',
 		'port': '3306',
