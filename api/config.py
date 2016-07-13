@@ -11,7 +11,7 @@ if ENV == 'development':
 		'database': 'airbnb_dev',
 		'port': 3306,
 		'charset': 'utf8',
-		'pasword': os.environ.get('AIRBNB_DATABASE_PWD_DEV', '')
+		'password': os.environ.get('AIRBNB_DATABASE_PWD_DEV', '')
 	}
 # PROD
 else if ENV == 'production':
@@ -24,7 +24,7 @@ else if ENV == 'production':
 		'database': 'airbnb_prod',
 		'port': 3306,
 		'charset': 'utf8',
-		'pasword': os.environ.get('AIRBNB_DATABASE_PWD_PROD', '')
+		'password': os.environ.get('AIRBNB_DATABASE_PWD_PROD', '')
 	}
 # ERRORS
 else:

@@ -1,7 +1,7 @@
 import peewee
 import md5
 
-database = peewee.SqliteDatabase("database",  pragmas=(('foreign_keys', True), ))
+# database = peewee.SqliteDatabase("database",  pragmas=(('foreign_keys', True), ))
 class USER (BaseModel):
     email = peewee.CharField(128, null=False, unique=True)
     password = peewee.CharField(128, null=False)
