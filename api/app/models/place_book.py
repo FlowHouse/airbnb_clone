@@ -1,7 +1,8 @@
 import peewee
 import place
-import user 
+import user
 
+@app.route()
 class PlaceBook(BaseModel):
     place = peewee.ForeignKeyField(Place)
     user = peewee.ForeignKeyField(User, related_name = "placesbooked")
