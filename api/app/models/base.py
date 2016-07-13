@@ -1,6 +1,6 @@
 import peewee
 from datetime import datetime
-#import config
+#import config 'from config import *'
 
 '''
 =============================================
@@ -47,7 +47,6 @@ base python starts here
 =======================
 '''
 
-
 # init the database with the correct parameters
 mysql_database = peewee.MySQLDatabase(
 	DATABASE.get('database'),
@@ -67,6 +66,7 @@ class BaseModel(peewee.Model):
 	id = peewee.PrimaryKeyField(unique = True)
     update_at = peewee.DateTimeField(default = datetime.now().strftime('%Y/%m/%d %H:%M;%S'))
     create_at = peewee.DateTimeField(default = datetime.now().strftime('%Y/%m/%d %H:%M;%S'))
+
 	# save func TODO more comments
     def save(self, *args, *kwargs):
         self.update_at = datetime.now().strftime('%Y/%m/%d %H:%M;%S')
