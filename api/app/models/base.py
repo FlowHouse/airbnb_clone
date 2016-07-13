@@ -12,3 +12,8 @@ class BaseModel(peewee.Model):
     def save(self, *args, *kwargs):
         self.update_at = datetime.now().strftime('%Y/%m/%d %H:%M;%S')
         peewee.Model.save(self)
+
+
+    class Meta():
+        database = db
+        ordered_by = ("id", )
