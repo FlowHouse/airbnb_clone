@@ -1,5 +1,5 @@
 from __init__ import app
-from app.views import *
+from views.index import *
 from config import HOST, PORT, DEBUG
 
 if __name__ == '__main__':

@@ -1,13 +1,20 @@
 from flask import Flask
 from flask_json import FlaskJSON, json_response
-import peetwee
-from datetime import datetime
+import peewee
+import datetime
+from dateutil import tz
+HERE = tz.tzloccal()
+UTC = tz.gettz('UTC')
 
-local_tz = timezone('America/Los_Angeles')
+# local_tz = timezone('America/Los_Angeles')
 
 @app.route('/', methods=['GET'])
 def index():
-    return json_response(status='OK', utc_time=datetime.utcnow()strftime('%m/%d/%Y %H:%M:%S'), time =utc_to_local=(datetime.utcnow()).strftime('%m/%d/%Y %H:%M:%S'))
+    return json_response(
+		status='OK',
+		utc_time=datetime.utcnow().strftime('%m/%d/%Y %H:%M:%S'),
+		time=datetime(tzinfo=tzlocal()).strftime('%m/%d/%Y %H:%M:%S')
+	)
 
 def before_request():
     models.database.connect()
