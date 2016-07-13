@@ -11,7 +11,7 @@ from app.models.user import *
 
 models = {
 	'amenity': Amenity,
-	'base': Base,
+	'base': BaseModel,
 	'city': City,
 	'place_amenity': Place_amenity,
 	'place_book': Place_book,
@@ -19,3 +19,14 @@ models = {
 	'state': State,
 	'user': User
 }
+
+mysql_database.connect()
+mysql_database.create_tables([
+	Amenity,Base,
+	City,
+	Place_amenity,
+	Place_book,
+	Place,
+	State,
+	User
+])
