@@ -21,7 +21,7 @@ elif ENV == 'production':
 	HOST = '0.0.0.0'
 	PORT = 3000
 	DATABASE = {
-		'host': '0.0.0.0',# IP address for web-01,
+		'host': '158.69.91.82',# IP address for web-01,
 		'user':'airbnb_user_prod',
 		'database': 'airbnb_prod',
 		'port': '3306',

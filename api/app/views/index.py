@@ -4,23 +4,28 @@ import peewee
 import datetime
 from dateutil import tz
 from app.app import *
+from app.models import *
 from config import *
-HERE = tz.tzlocal()
-UTC = tz.gettz('UTC')
+# HERE = tz.tzlocal()
+# UTC = tz.gettz('UTC')
 
 @app.route('/', methods=['GET'])
 def index():
     return json_response(
 		status='OK',
-		utc_time=datetime(tzinfo=UTC).strftime('%m/%d/%Y %H:%M:%S'),
-		time=datetime(tzinfo=tzlocal()).strftime('%m/%d/%Y %H:%M:%S')
+		utc_time=str(datetime.datetime.utcnow()),
+		time=str(datetime.datetime.now())
+		# utc_time=datetime(tzinfo=UTC).strftime('%m/%d/%Y %H:%M:%S'),
+		# time=datetime(tzinfo=tzlocal()).strftime('%m/%d/%Y %H:%M:%S')
 	)
 
+@app.before_request
 def before_request():
-    models.database.connect()
+    mysql_database.connect()
 
-def after_request():
-    models.database.close()
+@app.after_request
+def after_request(response):
+    mysql_database.close()
     return response
 
 @app.errorhandler(404)
