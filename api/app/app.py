@@ -1,4 +1,4 @@
-from app import app
+from app import *
 from app.views import *
 from config import HOST, PORT, DEBUG
 
