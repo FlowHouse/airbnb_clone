@@ -1,4 +1,3 @@
-from flask import Flask
 from app import app
 from app.views import *
 from config import HOST, PORT, DEBUG
