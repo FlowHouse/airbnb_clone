@@ -2,7 +2,7 @@ import peewee
 import user
 import city
 
-@app.route()
+
 class Place(BaseModel):
     owner = peewee.ForeignKeyField(User, related_name = "places")
     city = peewee.ForeignKeyField(User, related_name = "places")
