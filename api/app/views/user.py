@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_json import FlaskJSON, json_response
 import peewee
 from app import app
 
 @app.route('/users', methods=['GET'])
 def list_users():
-	return json_response(test='test')
+	users = []
+	return jsonify({"users": user})
 
 @app.route('/users', methods=['POST'])
 def create_user():
