@@ -3,12 +3,8 @@ from flask_json import FlaskJSON, json_response
 import peewee
 import datetime
 from dateutil import tz
-from __init__ import *
-from app import *
-from app.models import *
-from config import *
-# HERE = tz.tzlocal()
-# UTC = tz.gettz('UTC')
+from app import app
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -16,8 +12,6 @@ def index():
 		status='OK',
 		utc_time=str(datetime.datetime.utcnow()),
 		time=str(datetime.datetime.now())
-		# utc_time=datetime(tzinfo=UTC).strftime('%m/%d/%Y %H:%M:%S'),
-		# time=datetime(tzinfo=tzlocal()).strftime('%m/%d/%Y %H:%M:%S')
 	)
 
 @app.before_request

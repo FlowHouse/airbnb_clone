@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_json import FlaskJSON, json_response
 import peewee
+from app import app
 
 @app.route('/users', methods=['GET'])
 def list_users():
