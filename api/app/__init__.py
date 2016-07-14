@@ -6,3 +6,5 @@ from config import *
 
 app = Flask(__name__)
 FlaskJSON(app)
+
+from views import *

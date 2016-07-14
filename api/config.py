@@ -30,4 +30,4 @@ elif ENV == 'production':
 	}
 # ERRORS
 else:
-	raise Exception("Sum Ting Wong")
+	raise Exception("Could not evaluate the AIRBNB_ENV")
