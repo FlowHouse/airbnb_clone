@@ -1,5 +1,5 @@
 import peewee
-import state
+from state import State
 
 
 class City(BaseModel):
@@ -12,5 +12,5 @@ class City(BaseModel):
             "created_at": self.__created_at,
             "updated_at": self.__updated_at,
             "name": self.__name,
-            "state_id": self.__state_id, => ID of the State linked
+            "state_id": State.id,
         }
