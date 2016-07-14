@@ -1,6 +1,6 @@
 import peewee
-import user
-import city
+from user import *
+from city import *
 
 
 class Place(BaseModel):
@@ -20,8 +20,8 @@ class Place(BaseModel):
             "id": self.__id,
             "created_at": self.__created_at,
             "updated_at": self.__updated_at,
-            "owner_id": self.__owner_id, => ID of the User linked
-            "city_id": self.__city_id, => ID of the City linked
+            "owner_id": User.id,
+            "city_id": City.id,
             "name": self.__name,
             "description": self.__description,
             "number_rooms": self.__number_rooms,
