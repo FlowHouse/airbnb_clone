@@ -3,7 +3,8 @@ from flask_json import FlaskJSON, json_response
 import peewee
 import datetime
 from dateutil import tz
-from app.app import *
+from __init__ import *
+from app import *
 from app.models import *
 from config import *
 # HERE = tz.tzlocal()
