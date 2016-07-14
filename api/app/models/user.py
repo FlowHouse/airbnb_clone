@@ -18,3 +18,12 @@ class USER (BaseModel):
         self.pasword = md5.new(clear_password).hexidigest()
 
     def to_hash(self):
+        return {
+            "id": self.__id,
+            "created_at": self.__created_at,
+            "updated_at": self.__updated_at,
+            "email": self.__email,
+            "first_name": self.__first_name
+            "last_name": self.__last_name
+            "is_admin": self.__is_admin,
+        }
