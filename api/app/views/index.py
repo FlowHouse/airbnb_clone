@@ -4,7 +4,7 @@ import peewee
 import datetime
 from dateutil import tz
 from app import app
-
+from app.models.__init__ import *
 
 @app.route('/', methods=['GET'])
 def index():
@@ -26,7 +26,3 @@ def after_request(response):
 @app.errorhandler(404)
 def not_found(e):
     return json_response(add_status_=False, code=404, msg="not found")
-
-# def utc_to_local(utc_dt):
-#     local_dt = utc_dt.replace(tzinfo=utc).astimezone(local_tz)
-#     return local_tz.normalize(local_dt)
