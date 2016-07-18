@@ -7,11 +7,8 @@ import requests
 
 # to create a test client of app
 def setUp(self):
-	self.<DB_NAME>, <APP>.app.config['<DATABASE_NAME>'] = tempfile.mkstemp()
-	<APP>.app.config['TESTING'] = True
-	self.app = <APP>.app.test_client()
-	with <APP>.app.app_context(): # not sure what this does
-		<APP>.init_db()
+	self.app = app.app.test_client()
+
 # to validate if status of the JSON resp of GET / is equal to 200
 def test_200(self):
 	response = requests.get('http://localhost:5555/')
@@ -25,6 +22,14 @@ def test_status(self):
 
 # to validate if time of the JSON resp of GET / is equal of local time
 def test_time(self):
+	dt = str(datetime.datetime.now())
+	response = requests.get('http://localhost:5555/')
+	data = json.loads(response.text)
+	assert data['time'] == dt
 
 # to validate if utc time of the JSON resp of GET / is equal of utc time
 def test_time_utc(self):
+	dt = str(datetime.datetime.utcnow())
+	response = requests.get('http://localhost:5555/')
+	data = json.loads(response.text)
+	assert data['utc_time'] == dt
