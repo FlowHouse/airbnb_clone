@@ -2,6 +2,8 @@ import os
 
 ENV = os.environ.get('AIRBNB_ENV', '')
 
+# print ENV
+
 # DEV
 if ENV == 'development':
 	DEBUG = True
@@ -27,6 +29,19 @@ elif ENV == 'production':
 		'port': '3306',
 		'charset': 'utf8',
 		'password': os.environ.get('AIRBNB_DATABASE_PWD_PROD', '')
+	}
+# TEST
+elif ENV == 'test':
+	DEBUG = False
+	HOST = '127.0.0.1'
+	PORT = 5555
+	DATABASE = {
+		'host': '158.69.84.192',# IP address for web-01,
+		'user':'airbnb_user_test',
+		'database': 'airbnb_test',
+		'port': '3306',
+		'charset': 'utf8',
+		'password': os.environ.get('AIRBNB_DATABASE_PWD_TEST', '')
 	}
 # ERRORS
 else:
