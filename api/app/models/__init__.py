@@ -1,11 +1,12 @@
 import peewee
 from config import *
 
-# init the database with the correct parameters
-mysql_database = peewee.MySQLDatabase(
-	DATABASE.get('database'),
-	user=DATABASE.get('user'),
-	passwd=DATABASE.get('password'),
-	host=DATABASE.get('host'),
-	charset=DATABASE.get('charset')
-)
+__all__ = [
+    "amenity",
+    "city",
+    "place",
+    "place_amenity",
+    "place_book",
+    "state",
+    "user",
+    "base"]
