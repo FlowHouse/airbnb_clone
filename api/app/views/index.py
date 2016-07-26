@@ -1,18 +1,23 @@
-from flask import Flask
-from flask_json import FlaskJSON, json_response
-import peewee
-import datetime
+from flask import *
+from flask_json import *
+from peewee import *
+from datetime import datetime
 from dateutil import tz
 from app import app
-from app.models.__init__ import *
+from app.models.base import *
+from MySQLDatabase import *
+
+app.config['JSON_ADD_STATUS'] = False
 
 @app.route('/', methods=['GET'])
+@as_json
 def index():
-    return json_response(
-		status='OK',
-		utc_time=str(datetime.datetime.utcnow()),
-		time=str(datetime.datetime.now())
-	)
+    json_response = {
+		'status': "OK",
+        'utc_time': str(datetime.utcnow().strftime("%Y/%m/%d %H:%M:%S")),
+        'time': str(datetime.now().strftime("%Y/%m/%d %H:%M:%S"))
+	}
+    return json_response
 
 @app.before_request
 def before_request():
@@ -24,5 +29,9 @@ def after_request(response):
     return response
 
 @app.errorhandler(404)
-def not_found(e):
-    return json_response(add_status_=False, code=404, msg="not found")
+def not_found(error):
+    json_response = {
+        'code': 404,
+        'msg': "not found"
+        }
+        return json_response
