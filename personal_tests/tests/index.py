@@ -1,26 +1,30 @@
 # test github pull from head to forked repo
 import unittest
-import datetime
+from datetime import datetime
 import json
+import time
 import requests
-from app import *
+from app import app
 
 class BaseTest(unittest.TestCase):
-	"""docstring for BaseTest"""
-	response = requests.get('http://127.0.0.1:5555/')
+	# """docstring for BaseTest"""
+	# response = requests.get('http://127.0.0.1:5555/')
 
 	# to create a test client of app
 	def setUp(self):
 		self.app = app.test_client()
+		self.app.testing = True
 
 	# to validate if status of the JSON resp of GET / is equal to 200
 	def test_200(self):
-		assert response.status_code == 200
+		result = self.app.get('/')
+		self.assertEqual(results.status_code, 200)
 
 	# to validate if status of the JSON resp of GET / is equal to OK
 	def test_status(self):
-		data = json.loads(response.text)
-		assert data['status'] == 'OK'
+		result = self.app.get('/')
+		d = json.loads(resultse.data)
+		self.assertEqual(d.get("status"), "OK")
 
 	# to validate if time of the JSON resp of GET / is equal of local time
 	def test_time(self):
