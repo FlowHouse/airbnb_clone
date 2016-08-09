@@ -7,14 +7,15 @@ import md5
 
 
 class USER (BaseModel):
-    email = peewee.CharField(128, null=False, unique=True)
-    password = peewee.CharField(128, null=False)
-    first_name = peewee.CharField(128, null=False)
-    last_name = peewee.CharField(128, null=False)
-    is_admin = peewee.BooleanField(default=False)
-    if email is
-    return json_response(users)
-    return json_response(code= 1000, msg="Email already exists")
+    email = CharField(128, null=False, unique=True)
+    password = CharField(128, null=False)
+    first_name = CharField(128, null=False)
+    last_name = CharField(128, null=False)
+    is_admin = BooleanField(default=False)
+    if not email:
+    	return json_response(users)
+	else:
+    	return json_response(code= 1000, msg="Email already exists")
 
     def set_password(self, clear_password):
         self.pasword = hashlib.md5.new(clear_password).hexidigest()
@@ -25,8 +26,8 @@ class USER (BaseModel):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "email": self.email,
-            "first_name": self.first_name
-            "last_name": self.last_name
+            "first_name": self.first_name,
+            "last_name": self.last_name,
             "is_admin": self.is_admin,
         }
         return hash

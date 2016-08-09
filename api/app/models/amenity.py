@@ -3,7 +3,7 @@ from base import BaseModel
 
 
 class Amenity(BaseModel):
-    name = peewee.CharField(128, null=False)
+    name = CharField(128, null=False)
 
     def to_hash(self):
         hash = {
