@@ -1,7 +1,7 @@
 import peewee
 # hacky way of importing models
 from app.models.amenity import *
-from app.models.base import *
+from app.models.base import mysql_database
 from app.models.city import *
 from app.models.place_amenity import *
 from app.models.place_book import *
@@ -11,22 +11,21 @@ from app.models.user import *
 
 models = {
 	'amenity': Amenity,
-	'base': BaseModel,
 	'city': City,
-	'place_amenity': Place_amenity,
-	'place_book': Place_book,
+	'place_amenity': PlaceAmenity,
+	'place_book': PlaceBook,
 	'place': Place,
 	'state': State,
 	'user': User
 }
 
-mysql_database.connect()
+#mysql_database.connect()
 mysql_database.create_tables([
-	Amenity,Base,
+	Amenity,
 	City,
-	Place_amenity,
-	Place_book,
+	PlaceAmenity,
+	PlaceBook,
 	Place,
 	State,
 	User
-])
+], safe=True)

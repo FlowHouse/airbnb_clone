@@ -13,7 +13,7 @@ if ENV == 'development':
 		'host': '158.69.84.192',# IP address for web-01
 		'user':'airbnb_user_dev',
 		'database': 'airbnb_dev',
-		'port': '3306',
+		'port': 3306,
 		'charset': 'utf8',
 		'password': os.environ.get('AIRBNB_DATABASE_PWD_DEV', '')
 	}
@@ -26,7 +26,7 @@ elif ENV == 'production':
 		'host': '158.69.84.192',# IP address for web-01,
 		'user':'airbnb_user_prod',
 		'database': 'airbnb_prod',
-		'port': '3306',
+		'port': 3306,
 		'charset': 'utf8',
 		'password': os.environ.get('AIRBNB_DATABASE_PWD_PROD', '')
 	}
@@ -39,7 +39,7 @@ elif ENV == 'test':
 		'host': '158.69.84.192',# IP address for web-01,
 		'user':'airbnb_user_test',
 		'database': 'airbnb_test',
-		'port': '3306',
+		'port': 3306,
 		'charset': 'utf8',
 		'password': os.environ.get('AIRBNB_DATABASE_PWD_TEST', '')
 	}
