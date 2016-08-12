@@ -5,11 +5,11 @@ from place import Place
 
 
 class PlaceBook(BaseModel):
-    place = peewee.ForeignKeyField(Place)
-    user = peewee.ForeignKeyField(User, related_name = "places_booked")
-    is_validated = peewee.BooleanField(default=False)
-    date_start = peewee.DateTimeField(null = False)
-    number_nights = peewee.IntegerField(default = 1)
+    place = ForeignKeyField(Place)
+    user = ForeignKeyField(User, related_name = "places_booked")
+    is_validated = BooleanField(default=False)
+    date_start = DateTimeField(null = False)
+    number_nights = IntegerField(default = 1)
 
     def to_hash(self):
         hash = {
