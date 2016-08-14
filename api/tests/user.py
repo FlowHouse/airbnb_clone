@@ -29,6 +29,11 @@ class test_user(unittest.TestCase):
             results = self.create_user("test", str(i), str(i), str(i))
             self.assertEqual(json.loads(results.data)['id'], i)
 
+        no_parameter = self.app.post('/users' data=dict(first_name="test"))
+        not_unique = self.create_user("test", str(i), str(i) ,str(i))
+        self.assertEqual(no_parameter.status_code, 400)
+        self.assertEqual(not_unique.status_code, 409)
+
     def test_list(self):
         pass
 
