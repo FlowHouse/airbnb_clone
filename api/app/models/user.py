@@ -18,7 +18,7 @@ class User (BaseModel):
     # 	return json_response(code= 1000, msg="Email already exists")
 
     def set_password(self, clear_password):
-        self.pasword = hashlib.md5.new(clear_password).hexidigest()
+        self.password = hashlib.md5(clear_password).hexdigest()
 
     def to_hash(self):
         hash = {

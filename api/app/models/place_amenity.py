@@ -3,7 +3,7 @@ from base import mysql_database
 from amenity import Amenity
 from place import Place
 
-class PlaceAmenities(Model):
+class PlaceAmenity(Model):
     place = ForeignKeyField(Place)
     amenity = ForeignKeyField(Amenity)
 

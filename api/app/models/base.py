@@ -1,4 +1,4 @@
-from peewee import *
+import peewee
 from config import *
 from datetime import datetime
 
@@ -7,7 +7,7 @@ from datetime import datetime
 base python starts here
 =======================
 '''
-mysql_database = MySQLDatabase(
+mysql_database = peewee.MySQLDatabase(
 	user=DATABASE['user'],
 	passwd=DATABASE['password'],
 	host=DATABASE['host'],
@@ -16,24 +16,20 @@ mysql_database = MySQLDatabase(
 	database=DATABASE['database']
 )
 
-class BaseModel(Model):
+class BaseModel(peewee.Model):
 	"""docstring for BaseModel"""
-	# init func
-	def __init__(self):
-		# TODO
-		pass
-	# unique id for tables
-	id = PrimaryKeyField(unique = True)
-	time = datetime.now().strftime('%Y/%m/%d %H:%M;%S')
-	create_at = time
-	updated_at = time
 
-# save func TODO more comments
-def save(self, *args, **kwargs):
-    self.update_at = datetime.now().strftime('%Y/%m/%d %H:%M;%S')
-    return super(BaseModel, self).save(*args, **kwargs)
+	id = peewee.PrimaryKeyField(unique = True)
+	created_at = peewee.DateTimeField(default=datetime.now)
+	updated_at = peewee.DateTimeField(default=datetime.now)
 
-# metaclass func
-class Meta():
-    database = mysql_database
-    ordered_by = ("id", )
+
+	# save func TODO more comments
+	def save(self, *args, **kwargs):
+		self.update_at = datetime.now()
+		return super(BaseModel, self).save(*args, **kwargs)
+
+	# metaclass func
+	class Meta():
+		database = mysql_database
+		ordered_by = ("id", )
