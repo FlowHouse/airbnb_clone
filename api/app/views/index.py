@@ -21,7 +21,7 @@ def index():
 
 @app.before_request
 def before_request():
-    mysql_database.connect()
+	mysql_database.connect()
 
 @app.after_request
 def after_request(response):
