@@ -5,6 +5,7 @@ from app import app
 import unittest
 import logging
 import json
+import time
 
 class test_user(unittest.TestCase):
     def setUp(self):
@@ -34,22 +35,97 @@ class test_user(unittest.TestCase):
         self.assertEqual(no_parameter.status_code, 400)
         self.assertEqual(not_unique.status_code, 409)
 
+
     def test_list(self):
-        result = self.app.get('/user')
+        result = self.app.get('/users')
         self.assertEqual(len(json.loads(result.data)[0]['data']), 0)
 
-        self.create_state("test")
-        result = self.app.get('/user')
-        self.assertEqual(len(json.loads(result.data)[0]['data']), 1)
+        for i in range(1, 16):
+            self.create_user("test_" + str(i), "test_" + str(i),
+                             "test_" + str(i), "test_" + str(i))
+
+        result = self.app.get('/users')
+        self.assertEqual(len(json.loads(result.data)[0]['data']), 10)
+
+        result = self.app.get('/users?page=2&number=10')
+        self.assertEqual(len(json.loads(result.data)[0]['data']), 5)
+        self.assertEqual(
+            json.loads(result.data)[1]['paging']['next'], None)
+
+        result = self.app.get('/users?page=1&number=10')
+        self.assertEqual(len(json.loads(result.data)[0]['data']), 10)
+        self.assertEqual(
+            json.loads(result.data)[1]['paging']['previous'], None)
+
+        result = self.app.get('/users?page=2&number=2')
+        self.assertNotEqual(
+            json.loads(result.data)[1]['paging']['next'], None)
+        self.assertNotEqual(
+            json.loads(result.data)[1]['paging']['previous'], None)
 
     def test_get(self):
-        pass
+        result = self.create_user("user_1", "user_1", "user_1", "user_1")
+        self.assertEqual(result.status_code, 201)
+
+        result = self.app.get('/users/1')
+        self.assertEqual(json.loads(result.data)['first_name'], "user_1")
+
+        result = self.app.get('/users/2')
+        self.assertEqual(result.status_code, 404)
 
     def test_delete(self):
-        pass
+        result = self.create_user("user_1", "user_1", "user_1", "user_1")
+        self.assertEqual(result.status_code, 201)
+
+        result = self.app.get('/users')
+        self.assertEqual(len(json.loads(result.data)[0]['data']), 1)
+
+        self.app.delete('/users/1')
+        result = self.app.get('/users')
+        self.assertEqual(len(json.loads(result.data)[0]['data']), 0)
+
+        result = self.app.delete('/users/1')
+        self.assertEqual(result.status_code, 404)
 
     def test_update(self):
-        pass
+        result = self.create_user("user_1", "user_1", "user_1", "user_1")
+        self.assertEqual(result.status_code, 201)
+
+        time.sleep(2)
+
+        result = self.app.put('/users/1', data=dict(
+            first_name="updated",
+            last_name="updated",
+            created_at="1989/07/10 22:00:00",
+            updated_at="1989/07/10 22:00:00"
+        ))
+
+        self.assertEqual(result.status_code, 201)
+        result = self.app.get('/users')
+
+        self.assertNotEqual(json.loads(result.data)[0]['data'][0]['updated_at'],
+                            "1989/07/10 22:00:00")
+        self.assertNotEqual(json.loads(result.data)[0]['data'][0]['created_at'],
+                            "1989/07/10 22:00:00")
+
+        self.assertNotEqual(json.loads(result.data)[0]['data'][0]['created_at'],
+                            json.loads(result.data)[0]['data'][0]['updated_at'])
+
+        keys = ["first_name", "last_name"]
+        for key in keys:
+            self.assertEqual(json.loads(result.data)[0]['data'][0][key],
+                             "updated")
+
+        result = self.app.put('/users/2', data=dict(
+            first_name="updated",
+            last_name="updated",
+        ))
+        self.assertEqual(result.status_code, 404)
+
+        result = self.app.put('/users/1', data=dict(
+            email="updated"
+        ))
+        self.assertEqual(result.status_code, 409)
 
 
 if __name__ == '__main__':
